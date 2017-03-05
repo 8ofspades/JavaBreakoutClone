@@ -8,11 +8,11 @@ public class Breakout {
 	//Initializes the JFrame and calls the game panel
 	JFrame frame = new JFrame();
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setSize(600,500);
-        frame.setTitle("Breakout");
-        frame.setResizable(false);
-        frame.add(new GamePanel());
-        frame.setVisible(true);
+	frame.setSize(600, 500);
+    frame.setTitle("Breakout");
+    frame.setResizable(false);
+    frame.add(new GamePanel());
+    frame.setVisible(true);
     }
     
     //GamePanel Class
@@ -50,6 +50,13 @@ public class Breakout {
 		    paddle.paint(g2);
 		    ball.paint(g2);
 		    bconfig.paint(g2);
+		    
+		    if (ball.getY() > 600){
+				g2.setColor(Color.BLACK);
+				g2.setFont(new Font("Serif",Font.PLAIN,30));
+				g2.drawString("Game Over!",250,250);
+				timer.stop();
+		    }
 		}
 		
 		//Keep track of Paddle and Ball movements
@@ -97,18 +104,20 @@ public class Breakout {
 				int middleRight = paddle.getX() + (int)(2*paddle.getWidth()/3);
 				int rightSide = paddle.getX() + paddle.getWidth();
 		
+				// Bounces the ball to the left if it hits the left side of the paddle
 				if ((ball.getX() >= leftSide) && (ball.getX() < middleLeft)) {
-				    // Bounces the ball to the left if it hits the left side of the paddle
 				    ball.setXspeed(-2);
 				    ball.setYspeed(-2);
 				}
+				
+				// Bounces the ball upwards if it hits the center of the paddle
 				if ((ball.getX() >= middleLeft) && (ball.getX() <= middleRight)) {
-				    // Bounces the ball upwards if it hits the center of the paddle
 				    ball.setXspeed(0);
 				    ball.setYspeed(-2);
 				}
-				if ((ball.getX() > middleRight) && (ball.getX() <= rightSide)) {
-				    // Bounces the ball to the right if it hits the right side of the paddle
+				
+				// Bounces the ball to the right if it hits the right side of the paddle
+				if ((ball.getX() > middleRight) && (ball.getX() <= rightSide)) {				    
 				    ball.setXspeed(2);
 				    ball.setYspeed(-2);
 				}
