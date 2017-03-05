@@ -1,3 +1,4 @@
+//Implements paddle class
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -12,43 +13,53 @@ public class Paddle extends ColorShape{
     private static final Rectangle2D.Double shape = new Rectangle2D.Double(0,yPos,width,height);
     
     public Paddle() {
-	super(shape);
-	// set paddle color
-	setFillColor(Color.BLACK);
-	setBorderColor(Color.BLACK);
-	// set paddle position and speed
-	speed=0;
-	xPos=300;
+		super(shape);
+		// set paddle color
+		setFillColor(Color.BLACK);
+		setBorderColor(Color.BLACK);
+		// set paddle position and speed
+		speed=0;
+		xPos=300;
     }
     
-    public void move() {
 	// move paddle
-	xPos+=speed;
-	// stop the paddle from moving at the edges
-	if(xPos<0){
-	    speed=0;
-	    xPos=0;
-	}
-	if(xPos>510){
-	    speed=0;
-	    xPos=510;
-	}
-	// update shape
-	shape.setRect(xPos, yPos, width, height);
+    public void move() {
+		xPos+=speed;
+		// stop the paddle from moving at the edges
+		if(xPos<0){
+		    speed=0;
+		    xPos=0;
+		}
+		if(xPos>510){
+		    speed=0;
+		    xPos=510;
+		}
+		// update shape
+		shape.setRect(xPos, yPos, width, height);
     }
+    
+    //set speed
     public void setSpeed(int newSpeed) {
-	speed = newSpeed;
+    	speed = newSpeed;
     }
+    
+    //get paddle width
     public int getWidth() {
-	return width;
+    	return width;
     }
+    
+    //get paddle height
     public int getHeight() {
-	return height;
+    	return height;
     }
+    
+    //get paddle x pos
     public int getX() {
-	return xPos;
+    	return xPos;
     }
+    
+    //get paddle shape
     public Rectangle2D.Double getShape() {
-	return shape;
+    	return shape;
     } 
 }
